@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Secure Software Engineering Learning</title>
+    <link rel="stylesheet"  href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="sidenav">
+        <a href="/home">Home</a>
+        <a href="/sql">SQL Injections</a>
+    </div>
+    <div class="pageContent">
+        <h1>Welcome To SSEL!</h1>
+
+        <p>Welcome to our Secure Software Engineering Education platform,
+            dedicated to shaping the future of software developers with a
+            strong emphasis on Secure Software Engineering principles.
+            In an era where the security of software applications is paramount,
+            our platform focuses on delivering comprehensive theoretical
+            knowledge to equip students with a solid foundation in secure
+            coding practices. Our curated curriculum covers a spectrum of
+            crucial topics, ensuring that students understand principles
+            such as secure coding best practices, threat modeling, cryptography
+            essentials, secure data handling, and authentication and authorization
+            mechanisms. Dive into our courses to explore these key concepts and
+            fortify your skills in Secure Software Engineering. </p>
+
+            <h1>Contact Us</h1>
+
+            <p>Feel free to contact us with any comments, concerns, or suggestions on
+            topics we should discuss.</p>
+
+        <div class="contact">
+            <form action="/submit_form" method="post" class="contact-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+
+                <input type="submit" value="Submit">
+            </form>
+            {% if submitted_message %}
+                <div id="popup" class="popup">
+                    <p>{{ submitted_message }}</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
