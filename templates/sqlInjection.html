@@ -11,8 +11,47 @@
         <a href="/sql">SQL Injections</a>
     </div>
     <div class="pageContent">
-        <h1>SQL Injection!</h1>
+        <h1>SQL Injection</h1>
 
+        <p>An SQL injection is a type of cybersecurity attack that targets the vulnerability of a web application's database layer. It occurs when an attacker is able to insert malicious SQL (Structured Query Language) code into a query, which is then executed by the application's database. The primary goal of SQL injection is to manipulate the database in unintended ways, often by extracting, modifying, or deleting data.</p>
+        <hr>
+
+        <h2>How does it work?</h2>
+        <hr>
+
+        <ol>
+            <li>User Input: Web applications often take user input, such as through forms on a website.</li>
+            <br>
+            <li>Inadequate Input Validation: If the application does not properly validate or sanitize the user input, an attacker can inject malicious SQL code.</li>
+            <br>
+            <li>Malicious SQL Code: The attacker inserts SQL code into the input fields with the hope that the application will execute it.</li>
+            <br>
+            <li>Execution of Malicious Code: If successful, the malicious SQL code is executed by the database, leading to unauthorized access, data manipulation, or other malicious activities.</li>
+        </ol>
+
+        <p>An Example of a possibly malicious SQL Call: ' OR '1'='1' --</p>
+
+        <hr>
+        <h2>How can you solve it?</h2>
+        <hr>
+
+        <p>To prevent SQL injection, it's crucial for developers to use parameterized queries or prepared statements, which ensure that user input is treated as data rather than executable code. Additionally, input validation and proper authentication mechanisms are essential for securing web applications against such attacks.</p>
+        <br>
+        <p>Some Libraries can do this for you, such as:</p>
+        <ul>
+            <li><a href="https://github.com/mozilla/bleach">Python Flask: Bleach</a></li>
+            <li><a href="https://validatejs.org/">JavaScript: validate.js</a> </li>
+        </ul>
+        <hr>
+        <div class="References">
+            <h2>References</h2>
+            <hr>
+            <ul>
+                <li><a href="https://wiki.mozilla.org/WebAppSec/Secure_Coding_QA_Checklist#Layout">WebAppSec/Secure Coding QA Checklist</a></li>
+                <li><a href="https://github.com/mozilla/bleach">Python Flask: Bleach</a></li>
+                <li><a href="https://validatejs.org/">JavaScript: validate.js</a> </li>
+            </ul>
+        </div>
     </div>
 </body>
 </html>
