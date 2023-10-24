@@ -17,7 +17,7 @@ def sqlInjection():
 
 @app.route('/submit_form', methods=['POST'])
 def submit_form():
-    #input and clean data from form. bleach prevents SQL XSS etc.
+    # input and clean data from form
     name = bleach.clean(request.form['name'])
     email = bleach.clean(request.form['email'])
     message = bleach.clean(request.form['message'])
