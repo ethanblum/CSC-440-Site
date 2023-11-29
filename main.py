@@ -3,17 +3,30 @@ from flask import render_template
 import bleach
 import sqlite3
 
-app = Flask(__name__, template_folder='templates' )
-app.secret_key = 'CSC440Secret!' #Don't know what to do with this it seems to be needed...
+app = Flask(__name__, template_folder='templates')
+app.secret_key = 'CSC440Secret!'  # Don't know what to do with this it seems to be needed...
+
 
 @app.route('/')
 @app.route('/home')
 def home():
     return render_template('homePage.html')
 
+
 @app.route('/sql')
 def sqlInjection():
     return render_template('sqlInjection.html')
+
+
+@app.route('/overview')
+def overview():
+    return render_template('overviewPage.html')
+
+
+@app.route('/touchpoint')
+def touchPoint():
+    return render_template('touchPoint.html')
+
 
 @app.route('/submit_form', methods=['POST'])
 def submit_form():
@@ -32,7 +45,9 @@ def submit_form():
 
             cursor = conn.cursor()
 
-            cursor.execute("INSERT INTO contactUS (username, email, message) VALUES ('{}', '{}', '{}');".format(name, email, message))
+            cursor.execute(
+                "INSERT INTO contactUS (username, email, message) VALUES ('{}', '{}', '{}');".format(name, email,
+                                                                                                     message))
 
             cursor.execute('SELECT * FROM contactUS;')
 
@@ -44,6 +59,7 @@ def submit_form():
         print("SQLite error:", e)
 
     return render_template('homePage.html', submitted_message=submitted_message)
+
 
 if __name__ == "__main__":
     app.run()

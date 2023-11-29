@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Secure Software Engineering Learning</title>
+    <link rel="stylesheet"  href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="sidenav">
+        <a href="/home">Home</a>
+        <a href="/overview">Security Overview</a>
+        <a href="/touchpoint">Touchpoints</a>
+        <a href="/sql">SQL Injections</a>
+    </div>
+    <div class="pageContent">
+        <h1>Touchpoints</h1>
+
+        <img src="https://flylib.com/books/2/845/1/html/2/images/03fig01.jpg" alt="TouchPoints" width="400" height="200">
+        <p>Touchpoints are process that is meant to construct and destruct software. Destructing would be
+        to attack, exploit, or break your software in order to find vulnerabilities. While constructing means to build
+        functionalities and design defense mechanisms to protect software from vulnerabilities. There are 7 touchpoints
+        we will be looking at. Abuse case, Security requirements, risk analysis, risk-based security test, code review,
+        penetration testing, and security operations</p>
+        <hr>
+        <hr>
+        <h3>Abuse Cases</h3>
+            <ul>
+                <li>Many projects create use cases to better understand how a system is supposed to work.
+                    Abuse instances help anticipate what a system will do when it is attacked.
+                    It is extremely effective to consider misuse before it occurs</li>
+                <li>Taking an abstract view of your system architecture and brainstorming
+                    any possible methods your software could be attacked is another approach to look at abuse cases.</li>
+            </ul>
+        <hr>
+        <h3>Security Requirements</h3>
+            <ul>
+                <li>How secure does your system have to be? Who is going to attack it, and why would they do so?
+                    Above all, how much can you afford to do about it? </li>
+                <li>Think of it in terms of having a door with a lock for a home. While one would want the door and
+                    lock to be as secure as possible most would not spend the money to make the door bombproof.
+                    During this process you need to understand your security needs and wants. </li>
+            </ul>
+        <hr>
+        <h3>Risk Analysis</h3>
+            <ul>
+                <li>The goal of risk analysis is to detect, rank, and minimize design defects. In most software,
+                    design faults account for 50% of software security problems. </li>
+                <li>This is considered to be one of the two most important touchpoints</li>
+            </ul>
+        <hr>
+        <h3>Risk-based Security Tests</h3>
+            <ul>
+                <li>Testing security functionality, probing design flaws identified in risk analysis, and
+                    regression testing against security bugs make up this process. </li>
+            </ul>
+        <hr>
+        <h3>Code Review</h3>
+            <ul>
+                <li>This process helps find any bugs with the software that could be taken advantage of by an
+                    attacker. One example of a bug error is not allocating a proper amount of space to a buffer
+                    and causing it to overflow.</li>
+                <li>Tools like Fortify are a great way to automate reviewing source code. </li>
+                <li>Bugs account for the other 50% of secure software defects, which makes this process
+                    the second most important touchpoint. </li>
+            </ul>
+        <hr>
+        <h3>Penetration Testing</h3>
+            <ul>
+                <li>Progressively investigating a running system for security flaws is a crucial activity,
+                    but it frequently occurs after the fact, making solutions much more complex and expensive.</li>
+                <li>Pen testing is important for designing secure software but should not be the only touchpoint being used. </li>
+            </ul>
+        <hr>
+        <h3>Security Operations</h3>
+            <ul>
+                <li>Even a system that is designed for security, properly pen tested and debugged during
+                    development will be subjected to attack.</li>
+                <li>We are all human, and it is sometimes impossible to account for every possible vulnerability.
+                    So, this strategy is to implement is infosec or dev team to keep an eye on a running system. </li>
+            </ul>
+        <hr>
+        <div class="References">
+            <h4 style="color:blue;">Reference</h4>
+            <ul>
+                <li> <a href="https://www.darkreading.com/application-security/building-security-into-software/a/d-id/1338067">
+                    Building Security into Software</a></li>
+                <li> <a href="file:///C:/Users/BR/Downloads/Gary_McGraw_-_Software_Security__Building_Security_In-Addison-Wesley_Professional_2006.pdf">
+                    Software Security: Building Security In</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
