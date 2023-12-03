@@ -1,16 +1,46 @@
-from flask import Flask, request, session
-from flask import render_template
-import bleach
 import sqlite3
+import bleach
+from flask import Flask, request, session
+from flask import render_template, Blueprint
 
 app = Flask(__name__, template_folder='templates')
 app.secret_key = 'CSC440Secret!'  # Don't know what to do with this it seems to be needed...
 
 
 @app.route('/')
+def MainPage():
+    return render_template('login.html')
+
+
+database = {'nachi@gamil.com': '123', 'james123@gmail.com': 'aac', 'karthik.ne@gmail.com': 'asdf'}
+
+
+@app.route('/login_form', methods=['GET', 'POST'])
+def loginPage():
+    email1 = request.form['email']
+    pwd = request.form['password']
+    if email1 not in database:
+        return render_template('login.html', info='Invalid User')
+    else:
+        if database[email1] != pwd:
+            return render_template('login.html', info='Invalid User')
+        else:
+            return render_template('homePage.html', name=email1)
+
+
+@app.route('/Signup', methods=['GET', 'POST'])
+def Signup():
+    return render_template('signUp.html')
+
+
 @app.route('/home')
 def home():
     return render_template('homePage.html')
+
+
+@app.route('/signUp')
+def signUp():
+    return render_template('signUp.html')
 
 
 @app.route('/sql')
@@ -25,7 +55,7 @@ def overview():
 
 @app.route('/touchpoint')
 def touchPoint():
-    return render_template('touchPoints.html')
+    return render_template('touchPoint.html')
 
 
 @app.route('/submit_form', methods=['POST'])
@@ -63,3 +93,4 @@ def submit_form():
 
 if __name__ == "__main__":
     app.run()
+
