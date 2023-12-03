@@ -119,7 +119,7 @@ def submit_form():
             cursor = conn.cursor()
 
             cursor.execute(
-                "INSERT INTO contactUS (username, email, message) VALUES ('{}', '{}', '{}');".format(name, email,
+                "INSERT INTO contactUS (username, email, message) VALUES (?, ?, ?);", (name, email,
                                                                                                      message))
 
             cursor.execute('SELECT * FROM contactUS;')
