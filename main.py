@@ -9,13 +9,14 @@ app.secret_key = 'CSC440Secret!'  # Don't know what to do with this it seems to 
 
 
 @app.route('/')
+@app.route('/login')
 def MainPage():
     return render_template('login.html')
 
-@app.route('/login_form', methods=['GET', 'POST'])
+@app.route('/login_form', methods=['POST'])
 def loginPage():
     email1 = request.form['email']
-    pwd = hashlib.sha256(request.form['password'])
+    pwd = hashlib.sha256(request.form['password'].encode('utf-8')).hexdigest()
 
     try:
         # Connect to the SQLite database
@@ -23,15 +24,18 @@ def loginPage():
 
             cursor = conn.cursor()
 
-            database = cursor.execute('SELECT * FROM UserInfo;')
+            cursor.execute("SELECT username, passHash FROM UserInfo WHERE username = ?", (email1,))
+            result_set = cursor.fetchall()
 
-            if email1 not in database:
-                return render_template('login.html', info='Invalid User')
+            if not result_set:
+                return render_template('login.html', submitted_message="Email or Password is Incorrect")
             else:
-                if database[email1] != pwd:
-                    return render_template('login.html', info='Invalid User')
+                stored_username, stored_pass_hash = result_set[0]
+                if stored_pass_hash != pwd:
+                    return render_template('login.html', submitted_message="Email or Password is Incorrect")
                 else:
-                    return render_template('homePage.html', name=email1)
+                    conn.commit()
+                    return render_template('homePage.html')
 
     except sqlite3.Error as e:
         print("SQLite error:", e)
@@ -40,6 +44,41 @@ def loginPage():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     return render_template('signUp.html')
+
+@app.route('/signup_form', methods=['POST'])
+def signupForm():
+    name = request.form['name']
+    email1 = request.form['email']
+    pwd1 = request.form['password1'].encode('utf-8')
+    pwd2 = request.form['password2'].encode('utf-8')
+    shaPassword1 = hashlib.sha256(pwd1).hexdigest()
+    shaPassword2 = hashlib.sha256(pwd2).hexdigest()
+    if shaPassword1 == shaPassword2:
+
+        try:
+            # Connect to the SQLite database
+            with sqlite3.connect('SSQL_DBMS.db') as conn:
+
+                cursor = conn.cursor()
+
+                database = cursor.execute("SELECT username FROM UserInfo WHERE username LIKE ?", (email1,))
+
+                if database.fetchall():
+
+                    return render_template('signUp.html', submitted_message="Email Already In Use")
+                else:
+                    cursor.execute(
+                        "INSERT INTO UserInfo (username, passHash, name) VALUES (?, ?, ?);",
+                        (email1, shaPassword1, name)
+                    )
+                    conn.commit()
+                    return render_template('homePage.html')
+
+        except sqlite3.Error as e:
+            print("SQLite error:", e)
+    else:
+
+        return render_template('signUp.html', submitted_message = "Passwords Do Not Match")
 
 
 @app.route('/home')
