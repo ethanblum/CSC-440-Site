@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign-Up Page</title>
+    <link rel="stylesheet"  href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="sidenav">
+        <a href="/loginPage">Login</a>
+        <a href="/Signup">Sign-Up</a>
+    </div>
+    <div class="pageContent">
+        <h1>Please Log in to Access Page</h1>
+
+            <h1>Login</h1>
+
+        <div class="Login">
+            <form action="/login_form" method="post">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter Email">
+                <br />
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter Password">
+
+                <input type="submit" value="Submit">
+            </form>
+            {% if submitted_message %}
+                <div id="popup" class="popup">
+                    <p>{{ submitted_message }}</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
