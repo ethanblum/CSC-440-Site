@@ -98,7 +98,7 @@ def overview():
 
 @app.route('/touchpoint')
 def touchPoint():
-    return render_template('touchPoint.html')
+    return render_template('touchPoints.html')
 
 
 @app.route('/submit_form', methods=['POST'])
